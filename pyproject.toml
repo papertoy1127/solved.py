@@ -1,6 +1,6 @@
 [project]
 name = "solvedac"
-version = "0.0.2"
+version = "0.1.3"
 authors = [
   { name="cywohoy", email="papertoy1127@gmail.com" },
 ]
