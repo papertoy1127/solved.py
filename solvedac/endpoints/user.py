@@ -3,13 +3,13 @@ from ..schemes import Problem as _Problem, ClassStats as _ClassStats, TagStats a
 from ..schemes import CountedArray as _CountedArray, Badge as _Badge, AdditionalInfo as _AdditionalInfo
 from ..schemes import History as _History, Grass as _Grass, GrassTopic as _GrassTopic
 from ..session import SolvedSession as _SolvedSession
-from typing import cast as _cast, Sequence as _Sequence, Optional as _Optional, Literal as _Literal, NamedTuple as _NamedTuple
-from ..solved_types import JObject
+from typing import cast as _cast, Sequence as _Sequence, Optional as _Optional, Literal as _Literal
+from ..solved_types import JObject as _JObject
 from datetime import datetime as _datetime
 import json
 
 async def organizations(session: _SolvedSession, handle: str, **kwargs) -> _Optional[_Sequence[_Organization]]:
-    resp = await session.get("https://solved.ac/api/v3/user/_Organizations", {
+    resp = await session.get("https://solved.ac/_JObjectrganizations", {
         "handle": handle,
         **kwargs,
     })
@@ -133,7 +133,7 @@ async def additional_info(session: _SolvedSession, handle: str, **kwargs) -> _Op
     })
 
     if resp.status == 200:
-        return _AdditionalInfo(_cast(JObject, json.loads(await resp.text())))
+        return _AdditionalInfo(_cast(_JObject, json.loads(await resp.text())))
 
     if resp.status == 400:
         return None
@@ -155,7 +155,7 @@ async def histroy(session: _SolvedSession, handle: str, topic: _Literal["rating"
     
     raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
 
-async def grass(session: _SolvedSession, handle: str, topic: _Optional[_GrassTopic], **kwargs) -> _Optional[_Grass]:
+async def grass(session: _SolvedSession, handle: str, topic: _Optional[_GrassTopic] = None, **kwargs) -> _Optional[_Grass]:
     if topic is None:
         topic_str: str = 'default'
     else:
@@ -168,7 +168,7 @@ async def grass(session: _SolvedSession, handle: str, topic: _Optional[_GrassTop
     })
 
     if resp.status == 200:
-        return _Grass(_cast(JObject, json.loads(await resp.text())))
+        return _Grass(_cast(_JObject, json.loads(await resp.text())))
 
     if resp.status == 400:
         return None

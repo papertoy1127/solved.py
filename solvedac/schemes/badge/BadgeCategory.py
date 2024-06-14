@@ -5,7 +5,7 @@ class BadgeCategory(str, Enum):
         return self.name
 
     def __repr__(self):
-        return f"<{self.name.upper()}>"
+        return f"<{self.__class__.__name__}.{self.name.upper()}>"
     
     EVENT = "event"
     ACHIEVEMENT = "achievement"

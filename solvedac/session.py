@@ -2,7 +2,7 @@ from aiohttp import ClientSession, ClientResponse
 from typing import Mapping, Any
 
 class SolvedSession:
-    def __init__(self, lang: str):
+    def __init__(self, lang: str = "ko"):
         self.lang = lang
 
     async def get(self, url: str, params: Mapping[str, Any]|None = None) -> ClientResponse:

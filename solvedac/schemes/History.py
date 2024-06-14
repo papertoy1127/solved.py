@@ -1,7 +1,8 @@
 from datetime import datetime, date
-from typing import NamedTuple
+from dataclasses import dataclass
 
-class History(NamedTuple):
+@dataclass
+class History:
     timestamp: datetime|date
     value: int
 

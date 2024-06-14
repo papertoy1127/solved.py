@@ -1,5 +1,5 @@
 from ..schemes import ClassInfo as _ClassInfo, LevelInfo as _LevelInfo, Problem as _Problem
-from ..schemes import CountedArray as _CountedArray, SproutInfo as _SproutInfo
+from ..schemes import SproutInfo as _SproutInfo
 from ..session import SolvedSession as _SolvedSession
 from typing import Sequence as _Sequence, Optional as _Optional
 import json

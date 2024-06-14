@@ -1,6 +1,7 @@
 from .Background import Background
 from .BackgroundAuthor import BackgroundAuthor
 from .BackgroundCategory import BackgroundCategory
+from .BackgroundCoinShop import BackgroundCoinShop
 from .ClassInfo import ClassInfo
 from .CoinShopProduct import CoinShopProduct
 from .Color import Color
@@ -12,17 +13,20 @@ from .GrassTopic import GrassTopic
 from .GrassTheme import GrassTheme
 from .Item import Item
 from .LevelInfo import LevelInfo
+from .SiteStats import SiteStats
 from .SortCriteria import SortCriteria
 from .SproutInfo import SproutInfo
 
 from .badge import *
 from .problem import *
 from .user import *
+from .suggestion import *
 
 __all__ = [
     "Background",
     "BackgroundAuthor",
     "BackgroundCategory",
+    "BackgroundCoinShop",
     "ClassInfo",
     "CoinShopProduct",
     "Color",
@@ -34,6 +38,7 @@ __all__ = [
     "GrassTheme",
     "GrassTopic",
     "LevelInfo",
+    "SiteStats",
     "SortCriteria",
     "SproutInfo",
     
@@ -48,12 +53,21 @@ __all__ = [
     "ProblemTagNameTranslated",
     "ProblemTitleTranslated",
 
+    "AdditionalInfo",
     "ArenaTier",
     "ClassStats",
+    "Gender",
     "Organization",
     "OrganizationType",
     "ProblemStats",
     "SocialUser",
     "SolveTier",
+    "TagStats",
+    "TagRating",
     "User",
+    
+    "Suggestion",
+    "BriefProblem",
+    "BriefProblemTag",
+    "AutoComplete",
 ]

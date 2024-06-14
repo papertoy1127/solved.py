@@ -1,16 +1,11 @@
+from reprlib import Repr
 from ...solved_types import JObject, JArray
 from typing import cast, Sequence
 from .ProblemLevel import ProblemLevel
 from .ProblemTitleTranslated import ProblemTitleTranslated
 from .ProblemTag import ProblemTag
 
-class Problem:
-    def __str__(self):
-        return str(self.__dict__)
-    
-    def __repr__(self):
-        return f"<BOJ {self.problemId}: {self.titleKo}>"
-
+class Problem(Repr):
     def __init__(self, data: JObject):
         self.problemId = cast(int, data["problemId"])
         self.titleKo = cast(str, data["titleKo"])
