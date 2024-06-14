@@ -9,3 +9,4 @@ __path__ = __import__('pkgutil').extend_path(__path__, __name__)
 from .schemes import *
 from .solved_types import *
 from .endpoints import *
+from .session import *
