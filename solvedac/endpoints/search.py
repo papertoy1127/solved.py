@@ -46,19 +46,6 @@ async def user(session: _SolvedSession, query: str, page: int, **kwargs) -> _Cou
     
     raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
 
-async def user(session: _SolvedSession, query: str, page: int, **kwargs) -> _CountedArray[_User]:
-    resp = await session.get("https://solved.ac/api/v3/search/user", {
-        "query": query,
-        "page": page,
-        **kwargs,
-    })
-
-    if resp.status == 200:
-        dat = json.loads(await resp.text())
-        return _CountedArray(dat["count"], list(map(lambda x: _User(x), dat["items"])))
-    
-    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
-
 async def suggestion(session: _SolvedSession, query: str, **kwargs) -> _Suggestion:
     resp = await session.get("https://solved.ac/api/v3/search/suggestion", {
         "query": query,
