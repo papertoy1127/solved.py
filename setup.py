@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='solved.py',
-    version='0.1.4',
+    version='0.1.5',
     description='solved.ac api wrapper for python',
     author='cywohoy',
     author_email='papertoy1127@gmail.com',

@@ -10,6 +10,7 @@ async def problem(session: _SolvedSession, query: str, page: int, *, direction: 
         "query": query,
         "direction": direction,
         "page": page,
+        "sort": sort,
         **kwargs,
     })
 
