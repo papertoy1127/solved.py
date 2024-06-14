@@ -1,4 +1,4 @@
-__title__ = 'solvedac'
+__title__ = 'solved.py'
 __author__ = 'Cywohoy'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2024 cywohoy'
