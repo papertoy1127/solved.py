@@ -1,0 +1,16 @@
+[tool.pyright]
+include = ["solvedac"]
+exclude = []
+
+defineConstant = { }
+stubPath = "solvedac/stubs"
+
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+pythonVersion = "3.10"
+pythonPlatform = "Windows"
+
+executionEnvironments = [
+  { root = "solvedac" }
+]
