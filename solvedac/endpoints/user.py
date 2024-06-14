@@ -1,7 +1,11 @@
 from ..schemes import Organization as _Organization, User as _User, ProblemStats as _ProblemStats
-from ..schemes import Problem as _Problem, ClassStats as _ClassStats, TagStats as _TagStats, CountedArray as _CountedArray
+from ..schemes import Problem as _Problem, ClassStats as _ClassStats, TagStats as _TagStats, TagRating as _TagRating
+from ..schemes import CountedArray as _CountedArray, Badge as _Badge, AdditionalInfo as _AdditionalInfo
+from ..schemes import History as _History, Grass as _Grass, GrassTopic as _GrassTopic
 from ..session import SolvedSession as _SolvedSession
-from typing import Sequence as _Sequence, Optional as _Optional
+from typing import cast as _cast, Sequence as _Sequence, Optional as _Optional, Literal as _Literal, NamedTuple as _NamedTuple
+from ..solved_types import JObject
+from datetime import datetime as _datetime
 import json
 
 async def organizations(session: _SolvedSession, handle: str, **kwargs) -> _Optional[_Sequence[_Organization]]:
@@ -87,6 +91,84 @@ async def tag_stats(session: _SolvedSession, handle: str, page: int, **kwargs) -
     if resp.status == 200:
         dat = json.loads(await resp.text())
         return _CountedArray(dat["count"], list(map(lambda x: _TagStats(x), dat["items"])))
+
+    if resp.status == 400:
+        return None
+    
+    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
+
+async def tag_ratings(session: _SolvedSession, handle: str, **kwargs) -> _Optional[_Sequence[_TagRating]]:
+    resp = await session.get("https://solved.ac/api/v3/user/tag_ratings", {
+        "handle": handle,
+        **kwargs,
+    })
+
+    if resp.status == 200:
+        return list(map(lambda x: _TagRating(x), json.loads(await resp.text())))
+
+    if resp.status == 400:
+        return None
+    
+    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
+
+
+async def badge_stand(session: _SolvedSession, handle: str, **kwargs) -> _Optional[_Sequence[_Badge]]:
+    resp = await session.get("https://solved.ac/api/v3/user/badge_stand", {
+        "handle": handle,
+        **kwargs,
+    })
+
+    if resp.status == 200:
+        return list(map(lambda x: _Badge(x), json.loads(await resp.text())))
+
+    if resp.status == 400:
+        return None
+    
+    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
+
+async def additional_info(session: _SolvedSession, handle: str, **kwargs) -> _Optional[_AdditionalInfo]:
+    resp = await session.get("https://solved.ac/api/v3/user/additional_info", {
+        "handle": handle,
+        **kwargs,
+    })
+
+    if resp.status == 200:
+        return _AdditionalInfo(_cast(JObject, json.loads(await resp.text())))
+
+    if resp.status == 400:
+        return None
+    
+    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
+
+async def histroy(session: _SolvedSession, handle: str, topic: _Literal["rating", "ratingRank", "solvedCount", "voteCount"], **kwargs) -> _Optional[_Sequence[_History]]:
+    resp = await session.get("https://solved.ac/api/v3/user/history", {
+        "handle": handle,
+        "topic": topic,
+        **kwargs,
+    })
+
+    if resp.status == 200:
+        return list(map(lambda x: _History(_datetime.strptime(_cast(str, x["timestamp"]), "%Y-%m-%dT%H:%M:%S.%fZ"), _cast(int, x["value"])), json.loads(await resp.text())))
+
+    if resp.status == 400:
+        return None
+    
+    raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
+
+async def grass(session: _SolvedSession, handle: str, topic: _Optional[_GrassTopic], **kwargs) -> _Optional[_Grass]:
+    if topic is None:
+        topic_str: str = 'default'
+    else:
+        topic_str: str = topic.value
+
+    resp = await session.get("https://solved.ac/api/v3/user/grass", {
+        "handle": handle,
+        "topic": topic_str,
+        **kwargs,
+    })
+
+    if resp.status == 200:
+        return _Grass(_cast(JObject, json.loads(await resp.text())))
 
     if resp.status == 400:
         return None

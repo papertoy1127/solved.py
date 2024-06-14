@@ -5,9 +5,7 @@ import asyncio
 
 async def main():
     session = SolvedSession("ko")
-    a = await search.tag(session, "number_theory", 1)
-    print(a)
-    a = await search.tag(session, "a n", 2)
+    a = await user.grass(session, "cywohoy", GrassTopic.TODAY_SOLVED_MAX_TIER)
     print(a)
 
 if __name__ == "__main__":

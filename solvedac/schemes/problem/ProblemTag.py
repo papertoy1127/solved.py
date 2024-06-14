@@ -3,7 +3,13 @@ from typing import cast, Sequence
 from .ProblemTagAlias import ProblemTagAlias;
 from .ProblemTagNameTranslated import ProblemTagNameTranslated;
 
-class ProblemTag(Repr):
+class ProblemTag:
+    def __str__(self):
+        return str(self.__dict__)
+    
+    def __repr__(self):
+        return f"<Tag.{self.key}>"
+    
     def __init__(self, data: JObject):
         self.key = cast(str, data["key"])
         self.isMeta = cast(bool, data["isMeta"])
