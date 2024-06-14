@@ -14,7 +14,7 @@ async def exchange_rate(session: _SolvedSession, **kwargs) -> int:
 
     raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
 
-async def exchange_rate_history(session: _SolvedSession, **kwargs) -> _Sequence[_History]:
+async def exchange_rate_history(session: _SolvedSession, **kwargs) -> _Sequence[_History[int]]:
     resp = await session.get("https://solved.ac/api/v3/coins/exchange_rate_history", {
         **kwargs,
     })
