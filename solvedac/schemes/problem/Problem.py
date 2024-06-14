@@ -1,5 +1,4 @@
-from reprlib import Repr
-from ...solved_types import JObject, JArray
+from ...solved_types import JObject, JArray, Repr
 from typing import cast, Sequence
 from .ProblemLevel import ProblemLevel
 from .ProblemTitleTranslated import ProblemTitleTranslated

@@ -2,7 +2,7 @@ __title__ = 'solved.py'
 __author__ = 'Cywohoy'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2024 cywohoy'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 __path__ = __import__('pkgutil').extend_path(__path__, __name__)
 
