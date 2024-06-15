@@ -1,7 +1,7 @@
 from ..schemes import CoinShopProduct as _CoinShopProduct, History as _History
 from ..session import SolvedSession as _SolvedSession
 from typing import Sequence as _Sequence, cast as _cast
-from datetime import datetime as _datetime
+from datetime import datetime as _datetime, date as _date
 import json
 
 async def exchange_rate(session: _SolvedSession, **kwargs) -> int:
@@ -14,7 +14,7 @@ async def exchange_rate(session: _SolvedSession, **kwargs) -> int:
 
     raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
 
-async def exchange_rate_history(session: _SolvedSession, **kwargs) -> _Sequence[_History[int]]:
+async def exchange_rate_history(session: _SolvedSession, **kwargs) -> _Sequence[_History[_date,int]]:
     resp = await session.get("https://solved.ac/api/v3/coins/exchange_rate_history", {
         **kwargs,
     })

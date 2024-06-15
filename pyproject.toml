@@ -1,6 +1,6 @@
 [project]
 name = "solved.py"
-version = "0.1.10"
+version = "0.2.0"
 authors = [
   { name="cywohoy", email="papertoy1127@gmail.com" },
 ]

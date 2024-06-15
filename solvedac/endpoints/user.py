@@ -140,7 +140,7 @@ async def additional_info(session: _SolvedSession, handle: str, **kwargs) -> _Op
     
     raise Exception(f"Failed to request GET from {resp.url} with error code {resp.status}")
 
-async def histroy(session: _SolvedSession, handle: str, topic: _Literal["rating", "ratingRank", "solvedCount", "voteCount"], **kwargs) -> _Optional[_Sequence[_History[int]]]:
+async def histroy(session: _SolvedSession, handle: str, topic: _Literal["rating", "ratingRank", "solvedCount", "voteCount"], **kwargs) -> _Optional[_Sequence[_History[_datetime,int]]]:
     resp = await session.get("https://solved.ac/api/v3/user/history", {
         "handle": handle,
         "topic": topic,
